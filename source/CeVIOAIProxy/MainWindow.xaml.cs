@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace CeVIOAIProxy
 {
@@ -20,9 +8,42 @@ namespace CeVIOAIProxy
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static MainWindow Instance;
+
         public MainWindow()
         {
-            InitializeComponent();
+            Instance = this;
+
+            this.InitializeComponent();
+
+            this.StateChanged += this.MainWindow_StateChanged;
+        }
+
+        private void MainWindow_StateChanged(object sender, EventArgs e)
+        {
+            if (this.WindowState == WindowState.Minimized)
+            {
+                this.ToHide();
+            }
+            else
+            {
+                this.ToShow();
+            }
+        }
+
+        public void ToShow()
+        {
+            this.Show();
+            this.WindowState = WindowState.Normal;
+            //            this.NotifyIcon.Visibility = Visibility.Collapsed;
+
+            this.Activate();
+        }
+
+        public void ToHide()
+        {
+            //            this.NotifyIcon.Visibility = Visibility.Visible;
+            this.Hide();
         }
     }
 }

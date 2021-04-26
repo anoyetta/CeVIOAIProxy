@@ -4,10 +4,42 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:tb="http://www.hardcodet.net/taskbar"
   xmlns:local="clr-namespace:CeVIOAIProxy"
   mc:Ignorable="d"
-  Title="MainWindow" Height="450" Width="800">
-  <Grid>
+  WindowStartupLocation="CenterScreen"
+  Title="CeVIO AI Proxy" 
+  Icon="/share.ico"
+  Width="320" Height="240">
 
+  <Window.DataContext>
+    <local:MainViewModel />
+  </Window.DataContext>
+  
+  <Grid>
+    <tb:TaskbarIcon
+      x:Name="NotifyIcon"
+      IconSource="share.ico"
+      Visibility="Collapsed"
+      LeftClickCommand="{Binding ShowCommand, Mode=OneWay}"
+      ToolTipText="{Binding Config.AppNameWithVersion, Mode=OneWay}">
+      <tb:TaskbarIcon.ContextMenu>
+        <ContextMenu>
+          <MenuItem Header="設定" Command="{Binding ShowConfigCommand, Mode=OneWay}" />
+          <Separator />
+          <MenuItem Header="終了" Command="{Binding ExitCommand, Mode=OneWay}" />
+        </ContextMenu>
+      </tb:TaskbarIcon.ContextMenu>
+    </tb:TaskbarIcon>
+
+    <StackPanel
+      Margin="10">
+      <TextBlock Text="ボイス" Margin="0 0 0 5" />
+      <ComboBox 
+        ItemsSource="{Binding Voices}"
+        SelectedValue="{Binding Config.Voice, Mode=TwoWay}"
+        DisplayMemberPath="Name"
+        SelectedValuePath="Name" />
+    </StackPanel>
   </Grid>
 </Window>
