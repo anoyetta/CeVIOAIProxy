@@ -1,8 +1,10 @@
 using System;
+using System.Collections.ObjectModel;
 using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.Win32;
 using Newtonsoft.Json;
+using Prism.Mvvm;
 
 namespace CeVIOAIProxy
 {
@@ -109,6 +111,99 @@ namespace CeVIOAIProxy
         {
             get => this.rate;
             set => this.SetProperty(ref this.rate, value);
+        }
+
+        private string cast;
+
+        [JsonProperty(PropertyName = "cast")]
+        public string Cast
+        {
+            get => this.cast;
+            set => this.SetProperty(ref this.cast, value);
+        }
+
+        private uint volume;
+
+        [JsonProperty(PropertyName = "volume")]
+        public uint Volume
+        {
+            get => this.volume;
+            set => this.SetProperty(ref this.volume, value);
+        }
+
+        private uint tone;
+
+        [JsonProperty(PropertyName = "tone")]
+        public uint Tone
+        {
+            get => this.tone;
+            set => this.SetProperty(ref this.tone, value);
+        }
+
+        private uint alpha;
+
+        [JsonProperty(PropertyName = "alpha")]
+        public uint Alpha
+        {
+            get => this.alpha;
+            set => this.SetProperty(ref this.alpha, value);
+        }
+
+        private uint toneScale;
+
+        [JsonProperty(PropertyName = "tone_scale")]
+        public uint ToneScale
+        {
+            get => this.toneScale;
+            set => this.SetProperty(ref this.toneScale, value);
+        }
+
+        private ObservableCollection<CeVIOTalkerComponent> components = new ObservableCollection<CeVIOTalkerComponent>();
+
+        [JsonProperty(PropertyName = "components")]
+        public ObservableCollection<CeVIOTalkerComponent> Components
+        {
+            get => this.components;
+            set => this.SetProperty(ref this.components, value);
+        }
+    }
+
+    public class CeVIOTalkerComponent : BindableBase
+    {
+        private string cast;
+
+        [JsonProperty(PropertyName = "cast")]
+        public string Cast
+        {
+            get => this.cast;
+            set => this.SetProperty(ref this.cast, value);
+        }
+
+        private string id;
+
+        [JsonProperty(PropertyName = "id")]
+        public string ID
+        {
+            get => this.id;
+            set => this.SetProperty(ref this.id, value);
+        }
+
+        private string name;
+
+        [JsonProperty(PropertyName = "name")]
+        public string Name
+        {
+            get => this.name;
+            set => this.SetProperty(ref this.name, value);
+        }
+
+        private uint value;
+
+        [JsonProperty(PropertyName = "value")]
+        public uint Value
+        {
+            get => this.value;
+            set => this.SetProperty(ref this.value, value);
         }
     }
 }
