@@ -7,39 +7,61 @@
   xmlns:tb="http://www.hardcodet.net/taskbar"
   xmlns:local="clr-namespace:CeVIOAIProxy"
   mc:Ignorable="d"
+  ResizeMode="CanMinimize"
   WindowStartupLocation="CenterScreen"
   Title="CeVIO AI Proxy" 
   Icon="/share.ico"
-  Width="320" Height="240">
+  Width="320" Height="250">
 
   <Window.DataContext>
     <local:MainViewModel />
   </Window.DataContext>
-  
-  <Grid>
+
+  <Grid Margin="10">
     <tb:TaskbarIcon
       x:Name="NotifyIcon"
       IconSource="share.ico"
       Visibility="Collapsed"
-      LeftClickCommand="{Binding ShowCommand, Mode=OneWay}"
       ToolTipText="{Binding Config.AppNameWithVersion, Mode=OneWay}">
       <tb:TaskbarIcon.ContextMenu>
         <ContextMenu>
-          <MenuItem Header="設定" Command="{Binding ShowConfigCommand, Mode=OneWay}" />
+          <MenuItem Header="設定" Click="ShowSettings_Click" />
           <Separator />
-          <MenuItem Header="終了" Command="{Binding ExitCommand, Mode=OneWay}" />
+          <MenuItem Header="終了" Click="ExitApp_Click" />
         </ContextMenu>
       </tb:TaskbarIcon.ContextMenu>
     </tb:TaskbarIcon>
 
-    <StackPanel
-      Margin="10">
+    <StackPanel>
       <TextBlock Text="ボイス" Margin="0 0 0 5" />
       <ComboBox 
-        ItemsSource="{Binding Voices}"
-        SelectedValue="{Binding Config.Voice, Mode=TwoWay}"
-        DisplayMemberPath="Name"
-        SelectedValuePath="Name" />
+        ItemsSource="{Binding Voices, Mode=OneWay}"
+        SelectedValue="{Binding Config.VoiceID, Mode=TwoWay}"
+        DisplayMemberPath="VoiceInfo.Name"
+        SelectedValuePath="VoiceInfo.Id" />
+
+      <TextBlock Text="速さ" Margin="0 15 0 5" />
+      <Slider
+        Minimum="-10"
+        Maximum="10"
+        TickPlacement="BottomRight"
+        IsSnapToTickEnabled="True"
+        TickFrequency="1"
+        SmallChange="1"
+        LargeChange="1"
+        Value="{Binding Config.Rate, Mode=TwoWay}" />
+      <Grid Margin="0 2 0 0">
+        <TextBlock Text="-10" HorizontalAlignment="Left" />
+        <TextBlock Text="0" HorizontalAlignment="Center" />
+        <TextBlock Text="10" HorizontalAlignment="Right" />
+      </Grid>
+
+      <CheckBox
+        Margin="0 15 0 0"
+        Content="最小化して起動する"
+        IsChecked="{Binding Config.IsMinimizeStartup, Mode=TwoWay}" />
     </StackPanel>
+    
+    <Button Content="テスト" VerticalAlignment="Bottom" />
   </Grid>
 </Window>

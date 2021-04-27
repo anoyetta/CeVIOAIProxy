@@ -35,15 +35,31 @@ namespace CeVIOAIProxy
         {
             this.Show();
             this.WindowState = WindowState.Normal;
-            //            this.NotifyIcon.Visibility = Visibility.Collapsed;
+            this.NotifyIcon.Visibility = Visibility.Collapsed;
 
             this.Activate();
         }
 
         public void ToHide()
         {
-            //            this.NotifyIcon.Visibility = Visibility.Visible;
+            this.NotifyIcon.Visibility = Visibility.Visible;
             this.Hide();
+        }
+
+        public void HideNotifyIcon()
+        {
+            this.NotifyIcon.Visibility = Visibility.Collapsed;
+        }
+
+        private void ShowSettings_Click(object sender, RoutedEventArgs e)
+        {
+            this.ToShow();
+        }
+
+        private void ExitApp_Click(object sender, RoutedEventArgs e)
+        {
+            this.HideNotifyIcon();
+            this.Close();
         }
     }
 }

@@ -8,16 +8,17 @@ namespace CeVIOAIProxy
     {
         public MainViewModel()
         {
-            var synth = new SpeechSynthesizer();
-
-            foreach (var v in synth.GetInstalledVoices())
+            using (var synth = new SpeechSynthesizer())
             {
-                this.Voices.Add(v.VoiceInfo);
+                foreach (var voice in synth.GetInstalledVoices())
+                {
+                    this.Voices.Add(voice);
+                }
             }
         }
 
         public Config Config => Config.Instance;
 
-        public ObservableCollection<VoiceInfo> Voices = new ObservableCollection<VoiceInfo>();
+        public ObservableCollection<InstalledVoice> Voices { get; } = new ObservableCollection<InstalledVoice>();
     }
 }

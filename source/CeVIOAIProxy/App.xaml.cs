@@ -31,7 +31,7 @@ namespace CeVIOAIProxy
 
         private void App_Exit(object sender, ExitEventArgs e)
         {
-            CeVIOAIProxy.MainWindow.Instance?.ToHide();
+            CeVIOAIProxy.MainWindow.Instance?.HideNotifyIcon();
             Config.Instance.Save();
         }
 
@@ -54,7 +54,7 @@ namespace CeVIOAIProxy
                 MessageBoxButton.OK,
                 MessageBoxImage.Error);
 
-            CeVIOAIProxy.MainWindow.Instance?.ToHide();
+            CeVIOAIProxy.MainWindow.Instance?.HideNotifyIcon();
             Config.Instance.Save();
 
             this.Shutdown(1);

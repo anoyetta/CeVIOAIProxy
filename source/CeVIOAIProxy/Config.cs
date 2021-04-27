@@ -93,13 +93,22 @@ namespace CeVIOAIProxy
             set => this.SetProperty(ref this.isMinimizeStartup, value);
         }
 
-        private string voice;
+        private string voiceID;
 
-        [JsonProperty(PropertyName = "voice")]
-        public string Voice
+        [JsonProperty(PropertyName = "voice_id")]
+        public string VoiceID
         {
-            get => this.voice;
-            set => this.SetProperty(ref this.voice, value);
+            get => this.voiceID;
+            set => this.SetProperty(ref this.voiceID, value);
+        }
+
+        private int rate;
+
+        [JsonProperty(PropertyName = "rate")]
+        public int Rate
+        {
+            get => this.rate;
+            set => this.SetProperty(ref this.rate, value);
         }
     }
 }

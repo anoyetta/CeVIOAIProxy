@@ -8,6 +8,7 @@ namespace CeVIOAIProxy
         {
             { nameof(IsStartupWithWindows), false },
             { nameof(IsMinimizeStartup), false },
+            { nameof(Rate), 0 },
         };
     }
 }
