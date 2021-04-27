@@ -62,6 +62,9 @@
         IsChecked="{Binding Config.IsMinimizeStartup, Mode=TwoWay}" />
     </StackPanel>
     
-    <Button Content="テスト" VerticalAlignment="Bottom" />
+    <Button 
+      Content="テスト" 
+      VerticalAlignment="Bottom"
+      Command="{Binding TestCommand, Mode=OneWay}" />
   </Grid>
 </Window>

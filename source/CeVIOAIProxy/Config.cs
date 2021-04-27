@@ -10,7 +10,7 @@ namespace CeVIOAIProxy
     {
         #region Lazy Singleton
 
-        private readonly static Lazy<Config> instance = new Lazy<Config>(Load<Config>(_fileName, out bool _));
+        private readonly static Lazy<Config> instance = new Lazy<Config>(() => Load<Config>(_fileName, out bool _));
 
         public static Config Instance => instance.Value;
 
