@@ -29,15 +29,7 @@ namespace CeVIOAIProxy.Servers
         {
             this.isClosing = false;
 
-            this.listener = new TcpListener(IPAddress.Any, port);
-
-            /*
-            this.listener.Server.SetSocketOption(
-                SocketOptionLevel.Socket,
-                SocketOptionName.ReuseAddress,
-                true);
-            */
-
+            this.listener = new TcpListener(IPAddress.Parse("127.0.0.1"), port);
             this.listener.Start();
             this.listener.BeginAcceptTcpClient(AcceptTcpClientCallback, null);
         }
@@ -47,7 +39,6 @@ namespace CeVIOAIProxy.Servers
             if (this.listener != null)
             {
                 this.isClosing = true;
-                this.listener.Server.Close();
                 this.listener.Stop();
                 this.listener = null;
             }

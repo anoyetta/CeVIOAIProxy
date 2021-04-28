@@ -16,6 +16,22 @@ namespace CeVIOAIProxy
 
             this.InitializeComponent();
 
+            if (Config.Instance.IsMinimizeStartup)
+            {
+                this.ShowInTaskbar = false;
+                this.WindowState = WindowState.Minimized;
+
+                this.Loaded += (_, _) =>
+                {
+                    this.ToHide();
+                    this.ShowInTaskbar = true;
+                };
+            }
+            else
+            {
+                this.Loaded += (_, _) => this.Activate();
+            }
+
             this.StateChanged += this.MainWindow_StateChanged;
         }
 

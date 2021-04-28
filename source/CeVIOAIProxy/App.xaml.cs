@@ -24,19 +24,18 @@ namespace CeVIOAIProxy
 
             this.Startup += this.App_Startup;
             this.Exit += this.App_Exit;
+
             this.DispatcherUnhandledException += this.App_DispatcherUnhandledException;
+            AppDomain.CurrentDomain.UnhandledException += this.CurrentDomain_UnhandledException;
         }
 
-        private async void App_Startup(object sender, StartupEventArgs e)
+        private void App_Startup(object sender, StartupEventArgs e)
         {
             var c = Config.Instance;
             c.SetStartup(c.IsStartupWithWindows);
 
-            await Task.Run(() =>
-            {
-                this.server = new CAPTcpServer();
-                this.server.Open(c.TcpServerPort);
-            });
+            this.server = new CAPTcpServer();
+            this.server.Open(c.TcpServerPort);
         }
 
         private void App_Exit(object sender, ExitEventArgs e)
@@ -49,32 +48,44 @@ namespace CeVIOAIProxy
             GC.SuppressFinalize(this);
         }
 
-        private async void CloseServer()
+        private void CloseServer()
         {
             if (this.server != null)
             {
                 this.server.Close();
                 this.server.Dispose();
-                await Task.Delay(TimeSpan.FromMilliseconds(100));
                 this.server = null;
             }
         }
 
-        private async void App_DispatcherUnhandledException(
+        private void App_DispatcherUnhandledException(
             object sender,
             DispatcherUnhandledExceptionEventArgs e)
+        {
+            this.DumpUnhandledException(e.Exception);
+        }
+
+        private void CurrentDomain_UnhandledException(
+            object sender,
+            UnhandledExceptionEventArgs e)
+        {
+            this.DumpUnhandledException(e.ExceptionObject as Exception);
+        }
+
+        private async void DumpUnhandledException(
+            Exception ex)
         {
             await Task.Run(() =>
             {
                 File.WriteAllText(
                     @".\CeVIOAIProxy.error.log",
-                    e.Exception.ToString(),
+                    $"{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff}\n{ex}",
                     new UTF8Encoding(false));
             });
 
             MessageBox.Show(
                 "予期しない例外を検知しました。アプリケーションを終了します。\n\n" +
-                e.Exception,
+                ex,
                 "Fatal",
                 MessageBoxButton.OK,
                 MessageBoxImage.Error);
