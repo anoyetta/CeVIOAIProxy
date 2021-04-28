@@ -9,6 +9,8 @@ CastCraft → 棒読みちゃん → CeVIO AI
 CastCraft → CeVIOAIProxy → CeVIO AI  
 という流れで、このアプリケーションが棒読みちゃんのふりをして、CeVIO AI までの間を連携します。
 
+**要するに CastCraft などで CeVIO AI（小春六花など）が使えるようになります。**
+
 # ダウンロード
 *[こちら](https://github.com/anoyetta/CeVIOAIProxy/releases)* からダウンロードしてください。
 
