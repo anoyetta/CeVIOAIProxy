@@ -113,7 +113,7 @@ namespace CeVIOAIProxy
             set => this.SetProperty(ref this.cast, value);
         }
 
-        private uint volume;
+        private uint volume = CeVIOBasicParameterDefaultValue;
 
         [JsonProperty(PropertyName = "volume")]
         public uint Volume
@@ -122,7 +122,7 @@ namespace CeVIOAIProxy
             set => this.SetProperty(ref this.volume, value);
         }
 
-        private uint speed;
+        private uint speed = CeVIOBasicParameterDefaultValue;
 
         [JsonProperty(PropertyName = "speed")]
         public uint Speed
@@ -131,7 +131,7 @@ namespace CeVIOAIProxy
             set => this.SetProperty(ref this.speed, value);
         }
 
-        private uint tone;
+        private uint tone = CeVIOBasicParameterDefaultValue;
 
         [JsonProperty(PropertyName = "tone")]
         public uint Tone
@@ -140,7 +140,7 @@ namespace CeVIOAIProxy
             set => this.SetProperty(ref this.tone, value);
         }
 
-        private uint alpha;
+        private uint alpha = CeVIOBasicParameterDefaultValue;
 
         [JsonProperty(PropertyName = "alpha")]
         public uint Alpha
@@ -149,7 +149,7 @@ namespace CeVIOAIProxy
             set => this.SetProperty(ref this.alpha, value);
         }
 
-        private uint toneScale;
+        private uint toneScale = CeVIOBasicParameterDefaultValue;
 
         [JsonProperty(PropertyName = "tone_scale")]
         public uint ToneScale

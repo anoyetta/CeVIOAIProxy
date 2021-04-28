@@ -4,16 +4,18 @@ namespace CeVIOAIProxy
 {
     public partial class Config : JsonConfigBase
     {
+        public static readonly uint CeVIOBasicParameterDefaultValue = 50;
+
         public override Dictionary<string, object> DefaultValues => new Dictionary<string, object>()
         {
             { nameof(IsStartupWithWindows), false },
             { nameof(IsMinimizeStartup), false },
 
-            { nameof(Volume), 50 },
-            { nameof(Speed), 50 },
-            { nameof(Tone), 50 },
-            { nameof(Alpha), 50 },
-            { nameof(ToneScale), 50 },
+            { nameof(Volume), CeVIOBasicParameterDefaultValue },
+            { nameof(Speed), CeVIOBasicParameterDefaultValue },
+            { nameof(Tone), CeVIOBasicParameterDefaultValue },
+            { nameof(Alpha), CeVIOBasicParameterDefaultValue },
+            { nameof(ToneScale), CeVIOBasicParameterDefaultValue },
         };
     }
 }

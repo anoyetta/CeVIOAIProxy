@@ -35,6 +35,7 @@ namespace CeVIOAIProxy
                 talker.Cast = cast;
                 var components = talker.Components;
 
+                var isFirst = true;
                 foreach (var c in components)
                 {
                     if (!this.Config.Components.Any(x => x.ID == c.Id))
@@ -44,8 +45,10 @@ namespace CeVIOAIProxy
                             Cast = cast,
                             ID = c.Id,
                             Name = c.Name,
-                            Value = 50,
+                            Value = (uint)(isFirst ? 50 : 0),
                         });
+
+                        isFirst = false;
                     }
                 }
             }
