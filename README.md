@@ -1,6 +1,9 @@
 # CeVIOAIProxy
 CeVIO AI に棒読みちゃんと同等のTCPソケットインターフェースを生やすアプリケーションです。CastCraft などの棒読みちゃんを呼び出して読上げさせるソフトウェアから CeVIO AI を呼び出せるようになります。
 
+# ダウンロード
+*[こちら](https://github.com/anoyetta/CeVIOAIProxy/releases)* からダウンロードしてください。
+
 # 使い方
 1. CeVIOAIProxy.exe を起動する
 同時に CeVIO AI が起動します。
@@ -13,6 +16,3 @@ CeVIO AI に棒読みちゃんと同等のTCPソケットインターフェー�
 6. CeVIO AI が文章を読上げる
 
 CeVIOAIProxy は棒読みちゃんの代わりとなります。したがって、棒読みちゃんを起動する必要はありません。
-
-# ダウンロード
-*[こちら](https://github.com/anoyetta/CeVIOAIProxy/releases)* からダウンロードしてください。
