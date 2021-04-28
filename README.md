@@ -14,4 +14,5 @@ CeVIO AI に棒読みちゃんと同等のTCPソケットインターフェー�
 
 CeVIOAIProxy は棒読みちゃんの代わりとなります。したがって、棒読みちゃんを起動する必要はありません。
 
-# インストール
+# ダウンロード
+*[こちら](https://github.com/anoyetta/CeVIOAIProxy/releases)* からダウンロードしてください。
