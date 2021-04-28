@@ -104,6 +104,15 @@ namespace CeVIOAIProxy
             set => this.SetProperty(ref this.isMinimizeStartup, value);
         }
 
+        private int tcpServerPort = TcpServerPortDefaultValue;
+
+        [JsonProperty(PropertyName = "tcp_server_port")]
+        public int TcpServerPort
+        {
+            get => this.tcpServerPort;
+            set => this.SetProperty(ref this.tcpServerPort, value);
+        }
+
         private string cast;
 
         [JsonProperty(PropertyName = "cast")]
