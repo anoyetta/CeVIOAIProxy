@@ -8,7 +8,12 @@ namespace CeVIOAIProxy
         {
             { nameof(IsStartupWithWindows), false },
             { nameof(IsMinimizeStartup), false },
-            { nameof(Rate), 0 },
+
+            { nameof(Volume), 50 },
+            { nameof(Speed), 50 },
+            { nameof(Tone), 50 },
+            { nameof(Alpha), 50 },
+            { nameof(ToneScale), 50 },
         };
     }
 }

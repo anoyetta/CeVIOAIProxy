@@ -16,15 +16,24 @@ namespace CeVIOAIProxy
 
         public static Config Instance => instance.Value;
 
+        #endregion Lazy Singleton
+
         public Config()
         {
+            this.PropertyChanged += (_, e) =>
+            {
+                if (e.PropertyName == nameof(this.Cast))
+                {
+                    this.OnCastChanged?.Invoke(this, new EventArgs());
+                }
+            };
         }
-
-        #endregion Lazy Singleton
 
         private const string _fileName = @".\CeVIOAIProxy.config.json";
 
         public override string FileName => _fileName;
+
+        public event EventHandler OnCastChanged;
 
         [JsonIgnore]
         public string AppName
@@ -95,24 +104,6 @@ namespace CeVIOAIProxy
             set => this.SetProperty(ref this.isMinimizeStartup, value);
         }
 
-        private string voiceID;
-
-        [JsonProperty(PropertyName = "voice_id")]
-        public string VoiceID
-        {
-            get => this.voiceID;
-            set => this.SetProperty(ref this.voiceID, value);
-        }
-
-        private int rate;
-
-        [JsonProperty(PropertyName = "rate")]
-        public int Rate
-        {
-            get => this.rate;
-            set => this.SetProperty(ref this.rate, value);
-        }
-
         private string cast;
 
         [JsonProperty(PropertyName = "cast")]
@@ -129,6 +120,15 @@ namespace CeVIOAIProxy
         {
             get => this.volume;
             set => this.SetProperty(ref this.volume, value);
+        }
+
+        private uint speed;
+
+        [JsonProperty(PropertyName = "speed")]
+        public uint Speed
+        {
+            get => this.speed;
+            set => this.SetProperty(ref this.speed, value);
         }
 
         private uint tone;

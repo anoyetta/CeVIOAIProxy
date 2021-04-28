@@ -4,6 +4,7 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:bh="http://schemas.microsoft.com/xaml/behaviors"
   xmlns:tb="http://www.hardcodet.net/taskbar"
   xmlns:local="clr-namespace:CeVIOAIProxy"
   mc:Ignorable="d"
@@ -11,12 +12,19 @@
   WindowStartupLocation="CenterScreen"
   Title="CeVIO AI Proxy" 
   Icon="/share.ico"
-  Width="320" Height="250">
+  SizeToContent="Width"
+  Height="540">
 
   <Window.DataContext>
     <local:MainViewModel />
   </Window.DataContext>
 
+  <bh:Interaction.Triggers>
+    <bh:EventTrigger EventName="Loaded">
+      <bh:CallMethodAction MethodName="OnLoaded" TargetObject="{Binding}" />
+    </bh:EventTrigger>
+  </bh:Interaction.Triggers>
+  
   <Grid Margin="10">
     <tb:TaskbarIcon
       x:Name="NotifyIcon"
@@ -33,33 +41,147 @@
     </tb:TaskbarIcon>
 
     <StackPanel>
-      <TextBlock Text="ボイス" Margin="0 0 0 5" />
-      <ComboBox 
-        ItemsSource="{Binding Voices, Mode=OneWay}"
-        SelectedValue="{Binding Config.VoiceID, Mode=TwoWay}"
-        DisplayMemberPath="VoiceInfo.Name"
-        SelectedValuePath="VoiceInfo.Id" />
-
-      <TextBlock Text="速さ" Margin="0 15 0 5" />
-      <Slider
-        Minimum="-10"
-        Maximum="10"
-        TickPlacement="BottomRight"
-        IsSnapToTickEnabled="True"
-        TickFrequency="1"
-        SmallChange="1"
-        LargeChange="1"
-        Value="{Binding Config.Rate, Mode=TwoWay}" />
-      <Grid Margin="0 2 0 0">
-        <TextBlock Text="-10" HorizontalAlignment="Left" />
-        <TextBlock Text="0" HorizontalAlignment="Center" />
-        <TextBlock Text="10" HorizontalAlignment="Right" />
-      </Grid>
-
       <CheckBox
-        Margin="0 15 0 0"
+        Margin="0 0 0 0"
         Content="最小化して起動する"
         IsChecked="{Binding Config.IsMinimizeStartup, Mode=TwoWay}" />
+      
+      <TextBlock Text="キャスト" Margin="0 15 0 5" />
+      <ComboBox 
+        ItemsSource="{Binding Casts, Mode=OneWay}"
+        SelectedItem="{Binding Config.Cast, Mode=TwoWay}" />
+
+      <StackPanel 
+        Margin="0 15 0 0"
+        Orientation="Horizontal">
+        <StackPanel
+          Orientation="Vertical"
+          Width="50">
+          <TextBlock Text="大きさ" HorizontalAlignment="Center" />
+          <Slider
+            Margin="0 5 0 5"
+            Height="120"
+            HorizontalAlignment="Center"
+            Minimum="0"
+            Maximum="100"
+            Orientation="Vertical"
+            TickPlacement="Both"
+            TickFrequency="10"
+            SmallChange="1"
+            LargeChange="1"
+            Value="{Binding Config.Volume, Mode=TwoWay}" />
+          <TextBlock Text="{Binding Config.Volume, Mode=OneWay}" HorizontalAlignment="Center" />
+        </StackPanel>
+
+        <StackPanel
+          Orientation="Vertical"
+          Width="50">
+          <TextBlock Text="速さ" HorizontalAlignment="Center" />
+          <Slider
+            Margin="0 5 0 5"
+            Height="120"
+            HorizontalAlignment="Center"
+            Minimum="0"
+            Maximum="100"
+            Orientation="Vertical"
+            TickPlacement="Both"
+            TickFrequency="10"
+            SmallChange="1"
+            LargeChange="1"
+            Value="{Binding Config.Speed, Mode=TwoWay}" />
+          <TextBlock Text="{Binding Config.Speed, Mode=OneWay}" HorizontalAlignment="Center" />
+        </StackPanel>
+
+        <StackPanel
+          Orientation="Vertical"
+          Width="50">
+          <TextBlock Text="高さ" HorizontalAlignment="Center" />
+          <Slider
+            Margin="0 5 0 5"
+            Height="120"
+            HorizontalAlignment="Center"
+            Minimum="0"
+            Maximum="100"
+            Orientation="Vertical"
+            TickPlacement="Both"
+            TickFrequency="10"
+            SmallChange="1"
+            LargeChange="1"
+            Value="{Binding Config.Tone, Mode=TwoWay}" />
+          <TextBlock Text="{Binding Config.Tone, Mode=OneWay}" HorizontalAlignment="Center" />
+        </StackPanel>
+
+        <StackPanel
+          Orientation="Vertical"
+          Width="50">
+          <TextBlock Text="声質" HorizontalAlignment="Center" />
+          <Slider
+            Margin="0 5 0 5"
+            Height="120"
+            HorizontalAlignment="Center"
+            Minimum="0"
+            Maximum="100"
+            Orientation="Vertical"
+            TickPlacement="Both"
+            TickFrequency="10"
+            SmallChange="1"
+            LargeChange="1"
+            Value="{Binding Config.Alpha, Mode=TwoWay}" />
+          <TextBlock Text="{Binding Config.Alpha, Mode=OneWay}" HorizontalAlignment="Center" />
+        </StackPanel>
+
+        <StackPanel
+          Orientation="Vertical"
+          Width="50">
+          <TextBlock Text="抑揚" HorizontalAlignment="Center" />
+          <Slider
+            Margin="0 5 0 5"
+            Height="120"
+            HorizontalAlignment="Center"
+            Minimum="0"
+            Maximum="100"
+            Orientation="Vertical"
+            TickPlacement="Both"
+            TickFrequency="10"
+            SmallChange="1"
+            LargeChange="1"
+            Value="{Binding Config.ToneScale, Mode=TwoWay}" />
+          <TextBlock Text="{Binding Config.ToneScale, Mode=OneWay}" HorizontalAlignment="Center" />
+        </StackPanel>
+      </StackPanel>
+
+      <ItemsControl
+        Margin="0 15 0 0"
+        ItemsSource="{Binding CurrentComponets, Mode=OneWay}">
+        <ItemsControl.ItemsPanel>
+          <ItemsPanelTemplate>
+            <StackPanel Orientation="Horizontal" />
+          </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+
+        <ItemsControl.ItemTemplate>
+          <DataTemplate>
+            <StackPanel
+              Orientation="Vertical"
+              Width="50">
+              <TextBlock Text="{Binding Name}" HorizontalAlignment="Center" />
+              <Slider
+                Margin="0 5 0 5"
+                Height="120"
+                HorizontalAlignment="Center"
+                Minimum="0"
+                Maximum="100"
+                Orientation="Vertical"
+                TickPlacement="Both"
+                TickFrequency="10"
+                SmallChange="1"
+                LargeChange="1"
+                Value="{Binding Value, Mode=TwoWay}" />
+              <TextBlock Text="{Binding Value, Mode=OneWay}" HorizontalAlignment="Center" />
+            </StackPanel>
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
     </StackPanel>
     
     <Button 
