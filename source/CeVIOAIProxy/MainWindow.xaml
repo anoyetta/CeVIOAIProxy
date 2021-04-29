@@ -14,7 +14,7 @@
   ResizeMode="CanMinimize"
   WindowStartupLocation="CenterScreen"
   Title="CeVIO AI Proxy" 
-  Icon="/share.ico"
+  Icon="share.png"
   Width="280" Height="720"
   Left="{Binding Config.X, Mode=TwoWay}"
   Top="{Binding Config.Y, Mode=TwoWay}">
