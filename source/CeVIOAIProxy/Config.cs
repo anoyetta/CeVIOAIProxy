@@ -98,6 +98,24 @@ namespace CeVIOAIProxy
                 }
             });
 
+        private double x;
+
+        [JsonProperty(PropertyName = "x")]
+        public double X
+        {
+            get => this.x;
+            set => this.SetProperty(ref this.x, Math.Round(value));
+        }
+
+        private double y;
+
+        [JsonProperty(PropertyName = "y")]
+        public double Y
+        {
+            get => this.y;
+            set => this.SetProperty(ref this.y, Math.Round(value));
+        }
+
         private bool isMinimizeStartup;
 
         [JsonProperty(PropertyName = "is_minimize_startup")]

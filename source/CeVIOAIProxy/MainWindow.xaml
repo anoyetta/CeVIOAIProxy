@@ -1,4 +1,4 @@
-<Window 
+<mah:MetroWindow
   x:Class="CeVIOAIProxy.MainWindow"
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -6,13 +6,18 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:bh="http://schemas.microsoft.com/xaml/behaviors"
   xmlns:tb="http://www.hardcodet.net/taskbar"
+  xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+  xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+  xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
   xmlns:local="clr-namespace:CeVIOAIProxy"
   mc:Ignorable="d"
   ResizeMode="CanMinimize"
   WindowStartupLocation="CenterScreen"
   Title="CeVIO AI Proxy" 
   Icon="/share.ico"
-  Width="280" Height="620">
+  Width="280" Height="720"
+  Left="{Binding Config.X, Mode=TwoWay}"
+  Top="{Binding Config.Y, Mode=TwoWay}">
 
   <Window.DataContext>
     <local:MainViewModel />
@@ -29,7 +34,8 @@
       x:Name="NotifyIcon"
       IconSource="share.ico"
       Visibility="Collapsed"
-      ToolTipText="{Binding Config.AppNameWithVersion, Mode=OneWay}">
+      ToolTipText="{Binding Config.AppNameWithVersion, Mode=OneWay}"
+      TrayMouseDoubleClick="ShowSettings_Click">
       <tb:TaskbarIcon.ContextMenu>
         <ContextMenu>
           <MenuItem Header="設定" Click="ShowSettings_Click" />
@@ -40,121 +46,126 @@
     </tb:TaskbarIcon>
 
     <StackPanel>
-      <CheckBox
-        Margin="0 0 0 0"
+      <mah:ToggleSwitch
+        HorizontalAlignment="Stretch"
         Content="最小化して起動する"
-        IsChecked="{Binding Config.IsMinimizeStartup, Mode=TwoWay}" />
+        IsOn="{Binding Config.IsMinimizeStartup, Mode=TwoWay}"  />
 
-      <TextBlock Text="待受ポート" Margin="0 15 0 5" />
-      <TextBox
-        Text="{Binding Config.TcpServerPort, Mode=TwoWay}"
-        MaxLength="5" />
-      <TextBlock Text="* 通常は変更する必要がありません" FontSize="10" />
+      <mah:MetroHeader Header="待受ポート" Margin="0 15 0 0">
+        <TextBox
+          Text="{Binding Config.TcpServerPort, Mode=TwoWay}"
+          MaxLength="5" />
+      </mah:MetroHeader>
+      <TextBlock Text="* 通常は変更する必要がありません" FontSize="10" Margin="0 2 0 0" />
       <TextBlock Text="* 変更後は再起動してください" FontSize="10" />
 
-      <TextBlock Text="キャスト" Margin="0 15 0 5" />
-      <ComboBox 
-        ItemsSource="{Binding Casts, Mode=OneWay}"
-        SelectedItem="{Binding Config.Cast, Mode=TwoWay}" />
+      <mah:MetroHeader Header="キャスト" Margin="0 15 0 0">
+        <ComboBox 
+          ItemsSource="{Binding Casts, Mode=OneWay}"
+          SelectedItem="{Binding Config.Cast, Mode=TwoWay}" />
+      </mah:MetroHeader>
 
-      <StackPanel 
-        Margin="0 15 0 0"
-        Orientation="Horizontal">
-        <StackPanel
-          Orientation="Vertical"
-          Width="50">
-          <TextBlock Text="大きさ" HorizontalAlignment="Center" />
-          <Slider
-            Margin="0 5 0 5"
-            Height="120"
-            HorizontalAlignment="Center"
-            Minimum="0"
-            Maximum="100"
+      <mah:MetroHeader Header="パラメータ" Margin="0 15 0 0">
+        <StackPanel 
+          Margin="0 10 0 0"
+          Orientation="Horizontal">
+          <StackPanel
             Orientation="Vertical"
-            TickPlacement="Both"
-            TickFrequency="10"
-            SmallChange="1"
-            LargeChange="1"
-            Value="{Binding Config.Volume, Mode=TwoWay}" />
-          <TextBlock Text="{Binding Config.Volume, Mode=OneWay}" HorizontalAlignment="Center" />
+            Width="50">
+            <TextBlock Text="大きさ" HorizontalAlignment="Center" />
+            <Slider
+              Margin="0 5 0 5"
+              Height="120"
+              HorizontalAlignment="Center"
+              Minimum="0"
+              Maximum="100"
+              Orientation="Vertical"
+              TickPlacement="Both"
+              TickFrequency="10"
+              SmallChange="1"
+              LargeChange="1"
+              Value="{Binding Config.Volume, Mode=TwoWay}" />
+            <TextBlock Text="{Binding Config.Volume, Mode=OneWay}" HorizontalAlignment="Center" />
+          </StackPanel>
+
+          <StackPanel
+            Orientation="Vertical"
+            Width="50">
+            <TextBlock Text="速さ" HorizontalAlignment="Center" />
+            <Slider
+              Margin="0 5 0 5"
+              Height="120"
+              HorizontalAlignment="Center"
+              Minimum="0"
+              Maximum="100"
+              Orientation="Vertical"
+              TickPlacement="Both"
+              TickFrequency="10"
+              SmallChange="1"
+              LargeChange="1"
+              Value="{Binding Config.Speed, Mode=TwoWay}" />
+            <TextBlock Text="{Binding Config.Speed, Mode=OneWay}" HorizontalAlignment="Center" />
+          </StackPanel>
+
+          <StackPanel
+            Orientation="Vertical"
+            Width="50">
+            <TextBlock Text="高さ" HorizontalAlignment="Center" />
+            <Slider
+              Margin="0 5 0 5"
+              Height="120"
+              HorizontalAlignment="Center"
+              Minimum="0"
+              Maximum="100"
+              Orientation="Vertical"
+              TickPlacement="Both"
+              TickFrequency="10"
+              SmallChange="1"
+              LargeChange="1"
+              Value="{Binding Config.Tone, Mode=TwoWay}" />
+            <TextBlock Text="{Binding Config.Tone, Mode=OneWay}" HorizontalAlignment="Center" />
+          </StackPanel>
+
+          <StackPanel
+            Orientation="Vertical"
+            Width="50">
+            <TextBlock Text="声質" HorizontalAlignment="Center" />
+            <Slider
+              Margin="0 5 0 5"
+              Height="120"
+              HorizontalAlignment="Center"
+              Minimum="0"
+              Maximum="100"
+              Orientation="Vertical"
+              TickPlacement="Both"
+              TickFrequency="10"
+              SmallChange="1"
+              LargeChange="1"
+              Value="{Binding Config.Alpha, Mode=TwoWay}" />
+            <TextBlock Text="{Binding Config.Alpha, Mode=OneWay}" HorizontalAlignment="Center" />
+          </StackPanel>
+
+          <StackPanel
+            Orientation="Vertical"
+            Width="50">
+            <TextBlock Text="抑揚" HorizontalAlignment="Center" />
+            <Slider
+              Margin="0 5 0 5"
+              Height="120"
+              HorizontalAlignment="Center"
+              Minimum="0"
+              Maximum="100"
+              Orientation="Vertical"
+              TickPlacement="Both"
+              TickFrequency="10"
+              SmallChange="1"
+              LargeChange="1"
+              Value="{Binding Config.ToneScale, Mode=TwoWay}" />
+            <TextBlock Text="{Binding Config.ToneScale, Mode=OneWay}" HorizontalAlignment="Center" />
+          </StackPanel>
         </StackPanel>
 
-        <StackPanel
-          Orientation="Vertical"
-          Width="50">
-          <TextBlock Text="速さ" HorizontalAlignment="Center" />
-          <Slider
-            Margin="0 5 0 5"
-            Height="120"
-            HorizontalAlignment="Center"
-            Minimum="0"
-            Maximum="100"
-            Orientation="Vertical"
-            TickPlacement="Both"
-            TickFrequency="10"
-            SmallChange="1"
-            LargeChange="1"
-            Value="{Binding Config.Speed, Mode=TwoWay}" />
-          <TextBlock Text="{Binding Config.Speed, Mode=OneWay}" HorizontalAlignment="Center" />
-        </StackPanel>
-
-        <StackPanel
-          Orientation="Vertical"
-          Width="50">
-          <TextBlock Text="高さ" HorizontalAlignment="Center" />
-          <Slider
-            Margin="0 5 0 5"
-            Height="120"
-            HorizontalAlignment="Center"
-            Minimum="0"
-            Maximum="100"
-            Orientation="Vertical"
-            TickPlacement="Both"
-            TickFrequency="10"
-            SmallChange="1"
-            LargeChange="1"
-            Value="{Binding Config.Tone, Mode=TwoWay}" />
-          <TextBlock Text="{Binding Config.Tone, Mode=OneWay}" HorizontalAlignment="Center" />
-        </StackPanel>
-
-        <StackPanel
-          Orientation="Vertical"
-          Width="50">
-          <TextBlock Text="声質" HorizontalAlignment="Center" />
-          <Slider
-            Margin="0 5 0 5"
-            Height="120"
-            HorizontalAlignment="Center"
-            Minimum="0"
-            Maximum="100"
-            Orientation="Vertical"
-            TickPlacement="Both"
-            TickFrequency="10"
-            SmallChange="1"
-            LargeChange="1"
-            Value="{Binding Config.Alpha, Mode=TwoWay}" />
-          <TextBlock Text="{Binding Config.Alpha, Mode=OneWay}" HorizontalAlignment="Center" />
-        </StackPanel>
-
-        <StackPanel
-          Orientation="Vertical"
-          Width="50">
-          <TextBlock Text="抑揚" HorizontalAlignment="Center" />
-          <Slider
-            Margin="0 5 0 5"
-            Height="120"
-            HorizontalAlignment="Center"
-            Minimum="0"
-            Maximum="100"
-            Orientation="Vertical"
-            TickPlacement="Both"
-            TickFrequency="10"
-            SmallChange="1"
-            LargeChange="1"
-            Value="{Binding Config.ToneScale, Mode=TwoWay}" />
-          <TextBlock Text="{Binding Config.ToneScale, Mode=OneWay}" HorizontalAlignment="Center" />
-        </StackPanel>
-      </StackPanel>
+      </mah:MetroHeader>
 
       <ItemsControl
         Margin="0 15 0 0"
@@ -195,4 +206,4 @@
       VerticalAlignment="Bottom"
       Command="{Binding TestCommand, Mode=OneWay}" />
   </Grid>
-</Window>
+</mah:MetroWindow>
