@@ -30,7 +30,7 @@ namespace CeVIOAIProxy.Servers
         {
             this.isClosing = false;
 
-            this.listener = new TcpListener(IPAddress.Parse("127.0.0.1"), port);
+            this.listener = new TcpListener(IPAddress.Any, port);
 
             // これがないとポートを完全に閉じてくれない
             MakeNotInheritable(this.listener);

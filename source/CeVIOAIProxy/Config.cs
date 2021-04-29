@@ -101,7 +101,7 @@ namespace CeVIOAIProxy
                 }
             });
 
-        private double x;
+        private double x = 100;
 
         [JsonProperty(PropertyName = "x")]
         public double X
@@ -110,7 +110,7 @@ namespace CeVIOAIProxy
             set => this.SetProperty(ref this.x, Math.Round(value));
         }
 
-        private double y;
+        private double y = 100;
 
         [JsonProperty(PropertyName = "y")]
         public double Y
