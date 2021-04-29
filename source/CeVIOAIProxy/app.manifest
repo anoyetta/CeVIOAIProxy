@@ -12,4 +12,7 @@
     <application>
     </application>
   </compatibility>
+  <windowsSettings>
+    <dpiAwareness xmlns="http://schemas.microsoft.com/SMI/2016/WindowsSettings">PerMonitorV2, PerMonitor</dpiAwareness>
+  </windowsSettings>
 </assembly>

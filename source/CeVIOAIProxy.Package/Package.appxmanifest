@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 
 <Package
   xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
@@ -12,8 +12,8 @@
   IgnorableNamespaces="uap rescap iot uap4 uap6 uap3 uap2">
 
   <Identity
-    Name="ec2f71a1-7290-49df-9f57-2da96c87a94f"
-    Publisher="CN=anoyetta"
+    Name="53361anoyetta.CeVIOAIProxy"
+    Publisher="CN=F99F6EFF-10C9-4ECE-8361-558FC002D810"
     Version="1.0.1.0" />
 
   <Properties>
@@ -28,7 +28,7 @@
   </Dependencies>
 
   <Resources>
-    <Resource Language="x-generate"/>
+    <Resource Language="x-generate" />
   </Resources>
 
   <Applications>
@@ -41,7 +41,7 @@
         BackgroundColor="transparent"
         Square150x150Logo="Images\Square150x150Logo.png"
         Square44x44Logo="Images\Square44x44Logo.png">
-        <uap:DefaultTile Wide310x150Logo="Images\Wide310x150Logo.png"  Square71x71Logo="Images\SmallTile.png" Square310x310Logo="Images\LargeTile.png"/>
+        <uap:DefaultTile Wide310x150Logo="Images\Wide310x150Logo.png"  Square71x71Logo="Images\SmallTile.png" Square310x310Logo="Images\LargeTile.png" />
         <uap:SplashScreen Image="Images\SplashScreen.png" />
       </uap:VisualElements>
     </Application>
@@ -49,7 +49,5 @@
 
   <Capabilities>
     <rescap:Capability Name="runFullTrust" />
-    <Capability Name="privateNetworkClientServer"/>
-    <uap3:Capability Name="backgroundMediaPlayback"/>
   </Capabilities>
 </Package>
