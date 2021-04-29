@@ -30,9 +30,12 @@ namespace CeVIOAIProxy
             };
         }
 
-        private static readonly string _fileName = Path.Combine(
-            AppContext.BaseDirectory,
-            @"CeVIOAIProxy.config.json");
+        public static readonly string AppData = Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+            "anoyetta",
+            "CeVIOAIProxy");
+
+        private static readonly string _fileName = Path.Combine(AppData, @"CeVIOAIProxy.config.json");
 
         public override string FileName => _fileName;
 

@@ -77,11 +77,20 @@ namespace CeVIOAIProxy
         {
             await Task.Run(() =>
             {
+                if (!Directory.Exists(Config.AppData))
+                {
+                    Directory.CreateDirectory(Config.AppData);
+                }
+
                 File.WriteAllText(
-                    @".\CeVIOAIProxy.error.log",
+                    Path.Combine(Config.AppData, @".\CeVIOAIProxy.error.log"),
                     $"{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff}\n{ex}",
                     new UTF8Encoding(false));
             });
+
+            this.CloseServer();
+            CeVIOAIProxy.MainWindow.Instance?.HideNotifyIcon();
+            Config.Instance.Save();
 
             MessageBox.Show(
                 "予期しない例外を検知しました。アプリケーションを終了します。\n\n" +
@@ -90,13 +99,7 @@ namespace CeVIOAIProxy
                 MessageBoxButton.OK,
                 MessageBoxImage.Error);
 
-            this.CloseServer();
-
-            CeVIOAIProxy.MainWindow.Instance?.HideNotifyIcon();
-            Config.Instance.Save();
-
             GC.SuppressFinalize(this);
-
             this.Shutdown(1);
         }
     }
