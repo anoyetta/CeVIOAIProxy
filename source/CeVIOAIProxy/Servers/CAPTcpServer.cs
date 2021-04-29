@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
+using System.Runtime.InteropServices;
 using System.Text;
 
 namespace CeVIOAIProxy.Servers
@@ -30,6 +31,8 @@ namespace CeVIOAIProxy.Servers
             this.isClosing = false;
 
             this.listener = new TcpListener(IPAddress.Parse("127.0.0.1"), port);
+            MakeNotInheritable(this.listener);
+
             this.listener.Start();
             this.listener.BeginAcceptTcpClient(AcceptTcpClientCallback, null);
         }
@@ -164,6 +167,17 @@ namespace CeVIOAIProxy.Servers
                     // 未実装
                     break;
             }
+        }
+
+        [DllImport("kernel32.dll", SetLastError = true)]
+        private static extern bool SetHandleInformation(IntPtr hObject, uint dwMask, uint dwFlags);
+
+        private const uint HANDLE_FLAG_INHERIT = 1;
+
+        private static void MakeNotInheritable(TcpListener tcpListener)
+        {
+            var handle = tcpListener.Server.Handle;
+            SetHandleInformation(handle, HANDLE_FLAG_INHERIT, 0);
         }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.Win32;
@@ -29,7 +30,9 @@ namespace CeVIOAIProxy
             };
         }
 
-        private const string _fileName = @".\CeVIOAIProxy.config.json";
+        private static readonly string _fileName = Path.Combine(
+            AppContext.BaseDirectory,
+            @"CeVIOAIProxy.config.json");
 
         public override string FileName => _fileName;
 

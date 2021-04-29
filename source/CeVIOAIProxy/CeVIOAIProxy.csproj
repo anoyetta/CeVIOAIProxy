@@ -8,6 +8,15 @@
     <LangVersion>preview</LangVersion>
     <SignAssembly>false</SignAssembly>
     <ApplicationManifest>app.manifest</ApplicationManifest>
+    <AssemblyOriginatorKeyFile>CeVIOAIProxy.pfx</AssemblyOriginatorKeyFile>
+    <Authors>anoyetta</Authors>
+    <Copyright>(c) 2021 anoyetta</Copyright>
+    <AssemblyVersion>1.0.0.1</AssemblyVersion>
+    <PackageIcon>share.ico</PackageIcon>
+    <PackageIconUrl />
+    <PackageProjectUrl>https://github.com/anoyetta/CeVIOAIProxy</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/anoyetta/CeVIOAIProxy.git</RepositoryUrl>
+    <RepositoryType>GitHub</RepositoryType>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -23,6 +32,10 @@
   <ItemGroup>
     <None Remove="share.ico" />
     <None Remove="share.png" />
+    <None Include="share.ico">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
@@ -53,5 +66,9 @@
     <Resource Include="share.ico" />
     <Resource Include="share.png" />
   </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="del $(OutDir)CeVIOAIProxy.exe.config&#xD;&#xA;" />
+  </Target>
 
 </Project>

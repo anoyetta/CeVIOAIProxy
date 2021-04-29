@@ -12,8 +12,7 @@
   WindowStartupLocation="CenterScreen"
   Title="CeVIO AI Proxy" 
   Icon="/share.ico"
-  SizeToContent="Width"
-  Height="540">
+  Width="280" Height="620">
 
   <Window.DataContext>
     <local:MainViewModel />
@@ -45,7 +44,14 @@
         Margin="0 0 0 0"
         Content="最小化して起動する"
         IsChecked="{Binding Config.IsMinimizeStartup, Mode=TwoWay}" />
-      
+
+      <TextBlock Text="待受ポート" Margin="0 15 0 5" />
+      <TextBox
+        Text="{Binding Config.TcpServerPort, Mode=TwoWay}"
+        MaxLength="5" />
+      <TextBlock Text="* 通常は変更する必要がありません" FontSize="10" />
+      <TextBlock Text="* 変更後は再起動してください" FontSize="10" />
+
       <TextBlock Text="キャスト" Margin="0 15 0 5" />
       <ComboBox 
         ItemsSource="{Binding Casts, Mode=OneWay}"

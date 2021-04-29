@@ -48,7 +48,7 @@ namespace CeVIOAIProxy
                             Cast = cast,
                             ID = c.Id,
                             Name = c.Name,
-                            Value = (uint)(isFirst ? 50 : 0),
+                            Value = (uint)(isFirst ? 100 : 0),
                         });
 
                         isFirst = false;
