@@ -13,8 +13,8 @@
 
   <Identity
     Name="53361anoyetta.CeVIOAIProxy"
-    Publisher="CN=F99F6EFF-10C9-4ECE-8361-558FC002D810"
-    Version="1.0.2.0" />
+    Publisher="CN=anoyetta"
+    Version="1.0.3.0" />
 
   <Properties>
     <DisplayName>CeVIO AI Proxy</DisplayName>
