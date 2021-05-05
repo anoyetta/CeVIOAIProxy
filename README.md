@@ -19,10 +19,10 @@ CastCraft → CeVIOAIProxy → CeVIO AI
 同時に CeVIO AI が起動します。
 2. CeVIOAIProxy の設定画面でキャストや各種読上げパラメータを設定する
 
-![image](https://user-images.githubusercontent.com/8295826/116401953-caf33880-a866-11eb-8de9-81e41ea99c9b.png)
+![image](https://user-images.githubusercontent.com/8295826/117169466-15932880-ae04-11eb-85e0-edc1b05196e0.png)
 
-4. CastCraft などの棒読みちゃんを呼び出すアプリケーションを起動する
-5. CastCraft などで文章の読上げを発生させる
-6. CeVIO AI が文章を読上げる
+3. CastCraft などの棒読みちゃんを呼び出すアプリケーションを起動する
+4. CastCraft などで文章の読上げを発生させる
+5. CeVIO AI が文章を読上げる
 
 CeVIOAIProxy は棒読みちゃんの代わりとなります。したがって、棒読みちゃんを起動する必要はありません。
