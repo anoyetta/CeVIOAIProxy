@@ -63,7 +63,7 @@
   <ItemGroup>
     <Reference Include="CeVIO.Talk.RemoteService2">
       <HintPath>C:\Program Files\CeVIO\CeVIO AI\CeVIO.Talk.RemoteService2.dll</HintPath>
-      <Private>false</Private>
+      <Private>true</Private>
     </Reference>
   </ItemGroup>
 
