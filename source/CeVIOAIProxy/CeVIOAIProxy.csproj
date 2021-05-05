@@ -11,13 +11,14 @@
     <AssemblyOriginatorKeyFile>CeVIOAIProxy.pfx</AssemblyOriginatorKeyFile>
     <Authors>anoyetta</Authors>
     <Copyright>(c) 2021 anoyetta</Copyright>
-    <AssemblyVersion>1.0.3.0</AssemblyVersion>
+    <AssemblyVersion>1.0.4.0</AssemblyVersion>
     <PackageIcon>share.ico</PackageIcon>
     <PackageIconUrl />
     <PackageProjectUrl>https://github.com/anoyetta/CeVIOAIProxy</PackageProjectUrl>
     <RepositoryUrl>https://github.com/anoyetta/CeVIOAIProxy.git</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
-    <Version>1.0.3</Version>
+    <Version>1.0.4</Version>
+    <StartupObject>CeVIOAIProxy.App</StartupObject>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -40,6 +41,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autoupdater.NET.Official" Version="1.6.4" />
     <PackageReference Include="Costura.Fody" Version="5.3.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -50,7 +52,6 @@
     <PackageReference Include="MahApps.Metro.IconPacks" Version="4.8.0" />
     <PackageReference Include="MaterialDesignThemes.MahApps" Version="0.1.6" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.31" />
-    <PackageReference Include="Nancy" Version="2.0.0" />
     <PackageReference Include="Nancy.Hosting.Self" Version="2.0.0" />
     <PackageReference Include="NETStandard.Library" Version="2.0.3" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />

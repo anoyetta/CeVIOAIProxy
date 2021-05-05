@@ -1,11 +1,13 @@
 using System;
 using System.IO;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Threading;
+using AutoUpdaterDotNET;
 using CeVIOAIProxy.Servers;
 
 namespace CeVIOAIProxy
@@ -36,6 +38,8 @@ namespace CeVIOAIProxy
 
             this.server = new CAPTcpServer();
             this.server.Open(c.TcpServerPort);
+
+            this.RunAutoUpdater();
         }
 
         private void App_Exit(object sender, ExitEventArgs e)
@@ -101,6 +105,27 @@ namespace CeVIOAIProxy
 
             GC.SuppressFinalize(this);
             this.Shutdown(1);
+        }
+
+        private void RunAutoUpdater()
+        {
+            var updaterJson = Path.Combine(
+                AppContext.BaseDirectory,
+                "CeVIOAIProxy.AutoUpdater.json");
+
+#if DEBUG
+            if (File.Exists(updaterJson))
+            {
+                File.Delete(updaterJson);
+            }
+#endif
+
+            AutoUpdater.PersistenceProvider = new JsonFilePersistenceProvider(updaterJson);
+
+            AutoUpdater.ShowSkipButton = false;
+            AutoUpdater.Start(
+                "https://raw.githubusercontent.com/anoyetta/CeVIOAIProxy/main/ReleaseNote.xml",
+                Assembly.GetExecutingAssembly());
         }
     }
 }
