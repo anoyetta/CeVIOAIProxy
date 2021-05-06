@@ -11,7 +11,7 @@
     <AssemblyOriginatorKeyFile>CeVIOAIProxy.pfx</AssemblyOriginatorKeyFile>
     <Authors>anoyetta</Authors>
     <Copyright>(c) 2021 anoyetta</Copyright>
-    <AssemblyVersion>1.0.4.0</AssemblyVersion>
+    <AssemblyVersion>1.0.4.1</AssemblyVersion>
     <PackageIcon>share.ico</PackageIcon>
     <PackageIconUrl />
     <PackageProjectUrl>https://github.com/anoyetta/CeVIOAIProxy</PackageProjectUrl>
@@ -19,6 +19,7 @@
     <RepositoryType>GitHub</RepositoryType>
     <Version>1.0.4</Version>
     <StartupObject>CeVIOAIProxy.App</StartupObject>
+    <FileVersion>1.0.4.1</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

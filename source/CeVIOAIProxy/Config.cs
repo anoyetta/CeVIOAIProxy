@@ -30,6 +30,7 @@ namespace CeVIOAIProxy
             };
         }
 
+        [JsonIgnore]
         public static readonly string AppData = Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
             "anoyetta",

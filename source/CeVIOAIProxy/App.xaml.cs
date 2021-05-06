@@ -110,7 +110,7 @@ namespace CeVIOAIProxy
         private void RunAutoUpdater()
         {
             var updaterJson = Path.Combine(
-                AppContext.BaseDirectory,
+                Config.AppData,
                 "CeVIOAIProxy.AutoUpdater.json");
 
 #if DEBUG
