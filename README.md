@@ -15,7 +15,7 @@ CastCraft → CeVIOAIProxy → CeVIO AI
 *[こちら](https://github.com/anoyetta/CeVIOAIProxy/releases)* からダウンロードしてください。
 
 # 使い方
-1. CeVIOAIProxy.exe を起動する
+1. CeVIOAIProxy.exe を起動する  
 同時に CeVIO AI が起動します。
 2. CeVIOAIProxy の設定画面でキャストや各種読上げパラメータを設定する
 
