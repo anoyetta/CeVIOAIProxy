@@ -1,4 +1,5 @@
 using CeVIO.Talk.RemoteService2;
+using CeVIOAIProxy.Servers;
 using Prism.Commands;
 using Prism.Mvvm;
 using System.Collections.ObjectModel;
@@ -60,6 +61,13 @@ namespace CeVIOAIProxy
 
             this.Config.OnCastChanged += (_, _) => this.SetCurrentComponents();
             this.SetCurrentComponents();
+
+            if (IpcRemotingServerController.Current != null)
+            {
+                this.IPCServerStatus = IpcRemotingServerController.Current.IsAvailable ?
+                    "IPC server is running." :
+                    "IPC server is stopped.";
+            }
         }
 
         private void SetCurrentComponents()
@@ -78,6 +86,14 @@ namespace CeVIOAIProxy
             {
                 this.CurrentComponets.Add(item);
             }
+        }
+
+        private string ipcServerStatus;
+
+        public string IPCServerStatus
+        {
+            get => this.ipcServerStatus;
+            set => this.SetProperty(ref this.ipcServerStatus, value);
         }
 
         private DelegateCommand testCommand;

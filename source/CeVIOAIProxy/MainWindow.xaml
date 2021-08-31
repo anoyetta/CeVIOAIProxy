@@ -1,19 +1,17 @@
 <mah:MetroWindow
   x:Class="CeVIOAIProxy.MainWindow"
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:bh="http://schemas.microsoft.com/xaml/behaviors"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:tb="http://www.hardcodet.net/taskbar"
-  xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-  xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-  xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
   xmlns:local="clr-namespace:CeVIOAIProxy"
+  xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
   mc:Ignorable="d"
   ResizeMode="CanMinimize"
   WindowStartupLocation="CenterScreen"
-  Title="CeVIO AI Proxy" 
+  Title="CeVIO AI Proxy"
   Icon="share.png"
   Width="550" Height="540"
   Left="{Binding Config.X, Mode=TwoWay}"
@@ -34,7 +32,7 @@
       <ColumnDefinition Width="265" />
       <ColumnDefinition />
     </Grid.ColumnDefinitions>
-    
+
     <tb:TaskbarIcon
       x:Name="NotifyIcon"
       IconSource="share.ico"
@@ -52,13 +50,13 @@
 
     <StackPanel Grid.Column="0" Margin="0 0 20 0">
       <mah:MetroHeader Header="キャスト" Margin="0 0 0 0">
-        <ComboBox 
+        <ComboBox
           ItemsSource="{Binding Casts, Mode=OneWay}"
           SelectedItem="{Binding Config.Cast, Mode=TwoWay}" />
       </mah:MetroHeader>
 
       <mah:MetroHeader Header="パラメータ" Margin="0 15 0 0">
-        <StackPanel 
+        <StackPanel
           Margin="0 10 0 0"
           Orientation="Horizontal">
           <StackPanel
@@ -156,7 +154,6 @@
             <TextBlock Text="{Binding Config.ToneScale, Mode=OneWay}" HorizontalAlignment="Center" />
           </StackPanel>
         </StackPanel>
-
       </mah:MetroHeader>
 
       <ItemsControl
@@ -195,14 +192,14 @@
 
     <StackPanel Grid.Column="1">
       <mah:ToggleSwitch
-            HorizontalAlignment="Stretch"
-            Content="最小化して起動する"
-            IsOn="{Binding Config.IsMinimizeStartup, Mode=TwoWay}"  />
+        HorizontalAlignment="Stretch"
+        Content="最小化して起動する"
+        IsOn="{Binding Config.IsMinimizeStartup, Mode=TwoWay}" />
 
       <mah:MetroHeader Header="待受ポート" Margin="0 15 0 0">
         <TextBox
-              Text="{Binding Config.TcpServerPort, Mode=TwoWay}"
-              MaxLength="5" />
+          Text="{Binding Config.TcpServerPort, Mode=TwoWay}"
+          MaxLength="5" />
       </mah:MetroHeader>
       <TextBlock Text="* 通常は変更する必要がありません" FontSize="10" Margin="0 2 0 0" />
       <TextBlock Text="* 変更後は再起動してください" FontSize="10" />
@@ -211,20 +208,21 @@
         Margin="0 15 0 0"
         HorizontalAlignment="Stretch"
         Content="IPCサーバで待受ける"
-        IsOn="{Binding Config.IsEnabledIPCServer, Mode=TwoWay}"  />
+        IsOn="{Binding Config.IsEnabledIPCServer, Mode=TwoWay}" />
       <TextBlock Text="* 変更後は再起動してください" FontSize="10" />
+      <TextBlock Text="{Binding IPCServerStatus, Mode=OneWay}" FontStyle="Italic" />
 
       <mah:MetroHeader Header="IPCチャンネル名" Margin="0 15 0 0">
         <TextBox
-              Text="{Binding Config.IPCChannelName, Mode=TwoWay}" />
+          Text="{Binding Config.IPCChannelName, Mode=TwoWay}" />
       </mah:MetroHeader>
       <TextBlock Text="* 通常は変更する必要がありません" FontSize="10" Margin="0 2 0 0" />
       <TextBlock Text="* 変更後は再起動してください" FontSize="10" />
     </StackPanel>
-    
-    <Button 
+
+    <Button
       Grid.ColumnSpan="2"
-      Content="テスト" 
+      Content="テスト"
       VerticalAlignment="Bottom"
       Command="{Binding TestCommand, Mode=OneWay}" />
   </Grid>
