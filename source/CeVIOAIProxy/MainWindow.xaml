@@ -15,7 +15,7 @@
   WindowStartupLocation="CenterScreen"
   Title="CeVIO AI Proxy" 
   Icon="share.png"
-  Width="280" Height="720"
+  Width="550" Height="540"
   Left="{Binding Config.X, Mode=TwoWay}"
   Top="{Binding Config.Y, Mode=TwoWay}">
 
@@ -28,8 +28,13 @@
       <bh:CallMethodAction MethodName="OnLoaded" TargetObject="{Binding}" />
     </bh:EventTrigger>
   </bh:Interaction.Triggers>
-  
+
   <Grid Margin="10">
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="265" />
+      <ColumnDefinition />
+    </Grid.ColumnDefinitions>
+    
     <tb:TaskbarIcon
       x:Name="NotifyIcon"
       IconSource="share.ico"
@@ -45,21 +50,8 @@
       </tb:TaskbarIcon.ContextMenu>
     </tb:TaskbarIcon>
 
-    <StackPanel>
-      <mah:ToggleSwitch
-        HorizontalAlignment="Stretch"
-        Content="最小化して起動する"
-        IsOn="{Binding Config.IsMinimizeStartup, Mode=TwoWay}"  />
-
-      <mah:MetroHeader Header="待受ポート" Margin="0 15 0 0">
-        <TextBox
-          Text="{Binding Config.TcpServerPort, Mode=TwoWay}"
-          MaxLength="5" />
-      </mah:MetroHeader>
-      <TextBlock Text="* 通常は変更する必要がありません" FontSize="10" Margin="0 2 0 0" />
-      <TextBlock Text="* 変更後は再起動してください" FontSize="10" />
-
-      <mah:MetroHeader Header="キャスト" Margin="0 15 0 0">
+    <StackPanel Grid.Column="0" Margin="0 0 20 0">
+      <mah:MetroHeader Header="キャスト" Margin="0 0 0 0">
         <ComboBox 
           ItemsSource="{Binding Casts, Mode=OneWay}"
           SelectedItem="{Binding Config.Cast, Mode=TwoWay}" />
@@ -200,8 +192,38 @@
         </ItemsControl.ItemTemplate>
       </ItemsControl>
     </StackPanel>
+
+    <StackPanel Grid.Column="1">
+      <mah:ToggleSwitch
+            HorizontalAlignment="Stretch"
+            Content="最小化して起動する"
+            IsOn="{Binding Config.IsMinimizeStartup, Mode=TwoWay}"  />
+
+      <mah:MetroHeader Header="待受ポート" Margin="0 15 0 0">
+        <TextBox
+              Text="{Binding Config.TcpServerPort, Mode=TwoWay}"
+              MaxLength="5" />
+      </mah:MetroHeader>
+      <TextBlock Text="* 通常は変更する必要がありません" FontSize="10" Margin="0 2 0 0" />
+      <TextBlock Text="* 変更後は再起動してください" FontSize="10" />
+
+      <mah:ToggleSwitch
+        Margin="0 15 0 0"
+        HorizontalAlignment="Stretch"
+        Content="IPCサーバで待受ける"
+        IsOn="{Binding Config.IsEnabledIPCServer, Mode=TwoWay}"  />
+      <TextBlock Text="* 変更後は再起動してください" FontSize="10" />
+
+      <mah:MetroHeader Header="IPCチャンネル名" Margin="0 15 0 0">
+        <TextBox
+              Text="{Binding Config.IPCChannelName, Mode=TwoWay}" />
+      </mah:MetroHeader>
+      <TextBlock Text="* 通常は変更する必要がありません" FontSize="10" Margin="0 2 0 0" />
+      <TextBlock Text="* 変更後は再起動してください" FontSize="10" />
+    </StackPanel>
     
     <Button 
+      Grid.ColumnSpan="2"
       Content="テスト" 
       VerticalAlignment="Bottom"
       Command="{Binding TestCommand, Mode=OneWay}" />

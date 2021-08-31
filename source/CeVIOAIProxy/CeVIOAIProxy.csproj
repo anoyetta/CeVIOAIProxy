@@ -11,7 +11,7 @@
     <AssemblyOriginatorKeyFile>CeVIOAIProxy.pfx</AssemblyOriginatorKeyFile>
     <Authors>anoyetta</Authors>
     <Copyright>(c) 2021 anoyetta</Copyright>
-    <AssemblyVersion>1.0.4.1</AssemblyVersion>
+    <AssemblyVersion>1.1.0.0</AssemblyVersion>
     <PackageIcon>share.ico</PackageIcon>
     <PackageIconUrl />
     <PackageProjectUrl>https://github.com/anoyetta/CeVIOAIProxy</PackageProjectUrl>
@@ -19,7 +19,7 @@
     <RepositoryType>GitHub</RepositoryType>
     <Version>1.0.4</Version>
     <StartupObject>CeVIOAIProxy.App</StartupObject>
-    <FileVersion>1.0.4.1</FileVersion>
+    <FileVersion>1.1.0.0</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -66,6 +66,7 @@
       <HintPath>C:\Program Files\CeVIO\CeVIO AI\CeVIO.Talk.RemoteService2.dll</HintPath>
       <Private>true</Private>
     </Reference>
+    <Reference Include="System.Runtime.Remoting" />
   </ItemGroup>
 
   <ItemGroup>

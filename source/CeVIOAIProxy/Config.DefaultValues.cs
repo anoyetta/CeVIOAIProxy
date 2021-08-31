@@ -12,6 +12,8 @@ namespace CeVIOAIProxy
             { nameof(IsStartupWithWindows), false },
             { nameof(IsMinimizeStartup), false },
             { nameof(TcpServerPort), TcpServerPortDefaultValue },
+            { nameof(IsEnabledIPCServer), false },
+            { nameof(IPCChannelName), "BouyomiChan" },
 
             { nameof(Volume), CeVIOBasicParameterDefaultValue },
             { nameof(Speed), CeVIOBasicParameterDefaultValue },

@@ -1,11 +1,11 @@
+using Microsoft.Win32;
+using Newtonsoft.Json;
+using Prism.Mvvm;
 using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
-using Microsoft.Win32;
-using Newtonsoft.Json;
-using Prism.Mvvm;
 
 namespace CeVIOAIProxy
 {
@@ -136,6 +136,24 @@ namespace CeVIOAIProxy
         {
             get => this.tcpServerPort;
             set => this.SetProperty(ref this.tcpServerPort, value);
+        }
+
+        private bool isEnabledIPCServer;
+
+        [JsonProperty(PropertyName = "is_enabled_ipc_server")]
+        public bool IsEnabledIPCServer
+        {
+            get => this.isEnabledIPCServer;
+            set => this.SetProperty(ref this.isEnabledIPCServer, value);
+        }
+
+        private string ipcChannelName;
+
+        [JsonProperty(PropertyName = "ipc_channel_name")]
+        public string IPCChannelName
+        {
+            get => this.ipcChannelName;
+            set => this.SetProperty(ref this.ipcChannelName, value);
         }
 
         private string cast;
