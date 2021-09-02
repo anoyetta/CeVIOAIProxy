@@ -14,6 +14,7 @@ namespace CeVIOAIProxy
             { nameof(TcpServerPort), TcpServerPortDefaultValue },
             { nameof(IsEnabledIPCServer), false },
             { nameof(IPCChannelName), "BouyomiChan" },
+            { nameof(RestApiPortNo), 50080 },
 
             { nameof(Volume), CeVIOBasicParameterDefaultValue },
             { nameof(Speed), CeVIOBasicParameterDefaultValue },

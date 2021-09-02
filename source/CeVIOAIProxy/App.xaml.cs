@@ -2,6 +2,7 @@ using AutoUpdaterDotNET;
 using CeVIOAIProxy.Servers;
 using System;
 using System.IO;
+using System.Net;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,11 +20,13 @@ namespace CeVIOAIProxy
     {
         private CAPTcpServer server;
         private IpcRemotingServerController ipcServer;
+        private BouyomiChanHttpServer restServer;
 
         public App()
         {
             this.ShutdownMode = ShutdownMode.OnMainWindowClose;
             RenderOptions.ProcessRenderMode = RenderMode.SoftwareOnly;
+            ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls12;
 
             this.Startup += this.App_Startup;
             this.Exit += this.App_Exit;
@@ -46,6 +49,11 @@ namespace CeVIOAIProxy
                 !string.IsNullOrEmpty(c.IPCChannelName))
             {
                 this.ipcServer.Open();
+            }
+
+            if (c.IsEnabledRestApiServer)
+            {
+                this.restServer = new BouyomiChanHttpServer(c.RestApiPortNo);
             }
 
             this.RunAutoUpdater();
@@ -75,6 +83,12 @@ namespace CeVIOAIProxy
                 this.ipcServer.Close();
                 this.ipcServer.Dispose();
                 this.ipcServer = null;
+            }
+
+            if (this.restServer != null)
+            {
+                this.restServer.Dispose();
+                this.restServer = null;
             }
         }
 

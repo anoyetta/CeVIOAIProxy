@@ -156,6 +156,24 @@ namespace CeVIOAIProxy
             set => this.SetProperty(ref this.ipcChannelName, value);
         }
 
+        private bool isEnabledRestApiServer;
+
+        [JsonProperty(PropertyName = "is_enabled_rest_api_server")]
+        public bool IsEnabledRestApiServer
+        {
+            get => this.isEnabledRestApiServer;
+            set => this.SetProperty(ref this.isEnabledRestApiServer, value);
+        }
+
+        private int restApiPortNo;
+
+        [JsonProperty(PropertyName = "rest_api_port_no")]
+        public int RestApiPortNo
+        {
+            get => this.restApiPortNo;
+            set => this.SetProperty(ref this.restApiPortNo, value);
+        }
+
         private string cast;
 
         [JsonProperty(PropertyName = "cast")]
