@@ -32,6 +32,7 @@ namespace CeVIOAIProxy
             this.Exit += this.App_Exit;
 
             this.DispatcherUnhandledException += this.App_DispatcherUnhandledException;
+            TaskScheduler.UnobservedTaskException += this.TaskScheduler_UnobservedTaskException;
             AppDomain.CurrentDomain.UnhandledException += this.CurrentDomain_UnhandledException;
         }
 
@@ -96,6 +97,14 @@ namespace CeVIOAIProxy
             object sender,
             DispatcherUnhandledExceptionEventArgs e)
         {
+            e.Handled = true;
+            this.DumpUnhandledException(e.Exception);
+        }
+
+        private void TaskScheduler_UnobservedTaskException(
+            object sender,
+            UnobservedTaskExceptionEventArgs e)
+        {
             this.DumpUnhandledException(e.Exception);
         }
 
@@ -106,30 +115,27 @@ namespace CeVIOAIProxy
             this.DumpUnhandledException(e.ExceptionObject as Exception);
         }
 
-        private async void DumpUnhandledException(
+        private void DumpUnhandledException(
             Exception ex)
         {
-            await Task.Run(() =>
+            if (!Directory.Exists(Config.AppData))
             {
-                if (!Directory.Exists(Config.AppData))
-                {
-                    Directory.CreateDirectory(Config.AppData);
-                }
+                Directory.CreateDirectory(Config.AppData);
+            }
 
-                File.WriteAllText(
-                    Path.Combine(Config.AppData, @".\CeVIOAIProxy.error.log"),
-                    $"{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff}\n{ex}",
-                    new UTF8Encoding(false));
-            });
-
+            File.WriteAllText(
+                Path.Combine(Config.AppData, @".\CeVIOAIProxy.error.log"),
+                $"{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff}\n{ex}",
+                new UTF8Encoding(false));
             this.CloseServer();
+
             CeVIOAIProxy.MainWindow.Instance?.HideNotifyIcon();
             Config.Instance.Save();
 
             MessageBox.Show(
                 "予期しない例外を検知しました。アプリケーションを終了します。\n\n" +
                 ex,
-                "Fatal",
+                "Fatal - CeVIO AI Proxy",
                 MessageBoxButton.OK,
                 MessageBoxImage.Error);
 

@@ -16,7 +16,7 @@ namespace CeVIOAIProxy.Servers
             int port)
         {
             this.server = new HttpListener();
-            this.server.Prefixes.Add($"http://+:{port}/");
+            this.server.Prefixes.Add($"http://localhost:{port}/");
             this.server.Start();
             this.server.BeginGetContext(this.GetContextCallback, null);
         }
