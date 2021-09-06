@@ -33,7 +33,7 @@ namespace CeVIOAIProxy.Servers
         }
 
         private IpcRemotingServer ipcServer;
-        private BouyomiChanRemoting ipcRemoteObject;
+        private FNF.Utility.BouyomiChanRemoting ipcRemoteObject;
 
         public async void Open()
         {
@@ -42,7 +42,7 @@ namespace CeVIOAIProxy.Servers
                 lock (this)
                 {
                     this.ipcServer = new IpcRemotingServer(Config.Instance.IPCChannelName);
-                    this.ipcRemoteObject = new BouyomiChanRemoting();
+                    this.ipcRemoteObject = new FNF.Utility.BouyomiChanRemoting();
                     this.ipcServer.RegisterRemotingObject(this.ipcRemoteObject, "Remoting");
 
                     Dispatcher.CurrentDispatcher.Invoke(() =>

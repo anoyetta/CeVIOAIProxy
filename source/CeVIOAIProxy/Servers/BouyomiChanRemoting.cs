@@ -1,32 +1,37 @@
 using System;
 
-namespace CeVIOAIProxy.Servers
+namespace FNF.Utility
 {
+    /// <summary>
+    /// .NET Remotingのためのクラス。（本クラスの内容を変更してしまうと通信できなくなってしまいます）
+    /// </summary>
     public class BouyomiChanRemoting : MarshalByRefObject
     {
         public async void AddTalkTask(string sTalkText)
         {
-            await CeVIO.SpeakAsync(sTalkText);
+            await CeVIOAIProxy.CeVIO.SpeakAsync(sTalkText);
         }
 
         public async void AddTalkTask(string sTalkText, int iSpeed, int iVolume, int vType)
         {
-            await CeVIO.SpeakAsync(sTalkText);
+            await CeVIOAIProxy.CeVIO.SpeakAsync(sTalkText);
         }
 
         public async void AddTalkTask(string sTalkText, int iSpeed, int iTone, int iVolume, int vType)
         {
-            await CeVIO.SpeakAsync(sTalkText);
+            await CeVIOAIProxy.CeVIO.SpeakAsync(sTalkText);
         }
 
         public int AddTalkTask2(string sTalkText)
         {
-            throw null;
+            CeVIOAIProxy.CeVIO.SpeakAsync(sTalkText).Wait();
+            return 0;
         }
 
         public int AddTalkTask2(string sTalkText, int iSpeed, int iTone, int iVolume, int vType)
         {
-            throw null;
+            CeVIOAIProxy.CeVIO.SpeakAsync(sTalkText).Wait();
+            return 0;
         }
 
         public void ClearTalkTasks()
@@ -37,9 +42,14 @@ namespace CeVIOAIProxy.Servers
         {
         }
 
-        public int TalkTaskCount { get { throw null; } }
-        public int NowTaskId { get { throw null; } }
-        public bool NowPlaying { get { throw null; } }
-        public bool Pause { get { throw null; } set { } }
+        public int TalkTaskCount => 0;
+        public int NowTaskId => 0;
+        public bool NowPlaying => false;
+
+        public bool Pause
+        {
+            get => true;
+            set { }
+        }
     }
 }
