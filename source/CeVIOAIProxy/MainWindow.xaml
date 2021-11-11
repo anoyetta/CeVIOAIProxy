@@ -39,6 +39,14 @@
       Visibility="Collapsed"
       ToolTipText="{Binding Config.AppNameWithVersion, Mode=OneWay}"
       TrayMouseDoubleClick="ShowSettings_Click">
+      <tb:TaskbarIcon.TrayToolTip>
+        <Border Background="#ede4cd">
+          <TextBlock 
+            Margin="5" 
+            Text="{Binding Config.AppNameWithVersion, Mode=OneWay}"
+            Foreground="#16160e"/>
+        </Border>
+      </tb:TaskbarIcon.TrayToolTip>
       <tb:TaskbarIcon.ContextMenu>
         <ContextMenu>
           <MenuItem Header="設定" Click="ShowSettings_Click" />
@@ -236,10 +244,21 @@
         Command="{Binding OpenFileCommand, Mode=OneWay}"/>
     </StackPanel>
 
-    <Button
+    <StackPanel 
       Grid.ColumnSpan="2"
-      Content="テスト"
-      VerticalAlignment="Bottom"
-      Command="{Binding TestCommand, Mode=OneWay}" />
+      VerticalAlignment="Bottom">
+      <Button
+        Content="テスト"
+        VerticalAlignment="Bottom"
+        Command="{Binding TestCommand, Mode=OneWay}" />
+
+      <DockPanel Margin="0 5 0 0">
+        <TextBlock 
+          DockPanel.Dock="Right" 
+          HorizontalAlignment="Right" 
+          FontSize="11"
+          Text="{Binding Config.AppNameWithVersion, Mode=OneWay}" />
+      </DockPanel>
+    </StackPanel>
   </Grid>
 </mah:MetroWindow>
