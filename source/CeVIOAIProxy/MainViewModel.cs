@@ -1,5 +1,6 @@
 using CeVIO.Talk.RemoteService2;
 using CeVIOAIProxy.Servers;
+using Microsoft.Win32;
 using Prism.Commands;
 using Prism.Mvvm;
 using System.Collections.ObjectModel;
@@ -61,6 +62,16 @@ namespace CeVIOAIProxy
 
             this.Config.OnCastChanged += (_, _) => this.SetCurrentComponents();
             this.SetCurrentComponents();
+
+            this.Config.OnCommentFileSubscriberChanged += (_, _) =>
+            {
+                CommentTextFileSubscriber.Current?.Stop();
+
+                if (this.Config.IsEnabledTextPolling)
+                {
+                    CommentTextFileSubscriber.Current?.Start();
+                }
+            };
         }
 
         private void SetCurrentComponents()
@@ -87,6 +98,33 @@ namespace CeVIOAIProxy
         {
             get => this.ipcServerStatus;
             set => this.SetProperty(ref this.ipcServerStatus, value);
+        }
+
+        private DelegateCommand openFileCommand;
+
+        public DelegateCommand OpenFileCommand =>
+            this.openFileCommand ?? (this.openFileCommand = new DelegateCommand(this.ExecuteOpenFileCommand));
+
+        private void ExecuteOpenFileCommand()
+        {
+            var d = new OpenFileDialog()
+            {
+                FilterIndex = 1,
+                Filter = "テキストファイル|*.txt|すべてのファイル|*.*",
+                RestoreDirectory = true
+            };
+
+            if (File.Exists(Config.Instance.CommentTextFilePath))
+            {
+                d.InitialDirectory = Path.GetDirectoryName(Config.Instance.CommentTextFilePath);
+                d.FileName = Path.GetFileName(Config.Instance.CommentTextFilePath);
+            }
+
+            var result = d.ShowDialog() ?? false;
+            if (result)
+            {
+                Config.Instance.CommentTextFilePath = d.FileName;
+            }
         }
 
         private DelegateCommand testCommand;

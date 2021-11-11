@@ -218,6 +218,22 @@
       </mah:MetroHeader>
       <TextBlock Text="* 通常は変更する必要がありません" FontSize="10" Margin="0 2 0 0" />
       <TextBlock Text="* 変更後は再起動してください" FontSize="10" />
+
+      <mah:ToggleSwitch
+        Margin="0 15 0 0"
+        HorizontalAlignment="Stretch"
+        Content="テキストファイルを監視して読上げる"
+        IsOn="{Binding Config.IsEnabledTextPolling, Mode=TwoWay}" />
+
+      <mah:MetroHeader Header="テキストファイルのパス" Margin="0 15 0 0">
+        <TextBox
+          Text="{Binding Config.CommentTextFilePath, Mode=TwoWay}"
+          MaxLength="5" />
+      </mah:MetroHeader>
+      <Button 
+        Margin="0 5 0 0" 
+        Content="参照"
+        Command="{Binding OpenFileCommand, Mode=OneWay}"/>
     </StackPanel>
 
     <Button

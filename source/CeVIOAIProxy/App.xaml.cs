@@ -20,6 +20,7 @@ namespace CeVIOAIProxy
     {
         private CAPTcpServer server;
         private BouyomiChanHttpServer restServer;
+        private CommentTextFileSubscriber commentFileSubscriber;
 
         public App()
         {
@@ -48,6 +49,8 @@ namespace CeVIOAIProxy
                 this.restServer = new BouyomiChanHttpServer(c.RestApiPortNo);
             }
 
+            this.commentFileSubscriber = new CommentTextFileSubscriber();
+
             this.RunAutoUpdater();
         }
 
@@ -75,6 +78,8 @@ namespace CeVIOAIProxy
                 this.restServer.Dispose();
                 this.restServer = null;
             }
+
+            this.commentFileSubscriber?.Dispose();
         }
 
         private void App_DispatcherUnhandledException(

@@ -27,6 +27,12 @@ namespace CeVIOAIProxy
                 {
                     this.OnCastChanged?.Invoke(this, new EventArgs());
                 }
+
+                if (e.PropertyName == nameof(this.IsEnabledTextPolling) ||
+                    e.PropertyName == nameof(this.CommentTextFilePath))
+                {
+                    this.OnCommentFileSubscriberChanged?.Invoke(this, new EventArgs());
+                }
             };
         }
 
@@ -41,6 +47,8 @@ namespace CeVIOAIProxy
         public override string FileName => _fileName;
 
         public event EventHandler OnCastChanged;
+
+        public event EventHandler OnCommentFileSubscriberChanged;
 
         [JsonIgnore]
         public string AppName
@@ -154,6 +162,24 @@ namespace CeVIOAIProxy
         {
             get => this.restApiPortNo;
             set => this.SetProperty(ref this.restApiPortNo, value);
+        }
+
+        private bool isEnabledTextPolling;
+
+        [JsonProperty(PropertyName = "is_enabled_text_polling")]
+        public bool IsEnabledTextPolling
+        {
+            get => this.isEnabledTextPolling;
+            set => this.SetProperty(ref this.isEnabledTextPolling, value);
+        }
+
+        private string commentTextFilePath;
+
+        [JsonProperty(PropertyName = "comment_text_file_path")]
+        public string CommentTextFilePath
+        {
+            get => this.commentTextFilePath;
+            set => this.SetProperty(ref this.commentTextFilePath, value);
         }
 
         private string cast;
