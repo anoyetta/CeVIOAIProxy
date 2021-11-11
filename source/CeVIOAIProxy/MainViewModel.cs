@@ -61,13 +61,6 @@ namespace CeVIOAIProxy
 
             this.Config.OnCastChanged += (_, _) => this.SetCurrentComponents();
             this.SetCurrentComponents();
-
-            if (IpcRemotingServerController.Current != null)
-            {
-                this.IPCServerStatus = IpcRemotingServerController.Current.IsAvailable ?
-                    "IPC server is running." :
-                    "IPC server is stopped.";
-            }
         }
 
         private void SetCurrentComponents()

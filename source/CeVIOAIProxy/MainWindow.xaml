@@ -207,21 +207,6 @@
       <mah:ToggleSwitch
         Margin="0 15 0 0"
         HorizontalAlignment="Stretch"
-        Content="IPCサーバで待受ける"
-        IsOn="{Binding Config.IsEnabledIPCServer, Mode=TwoWay}" />
-      <TextBlock Text="* 変更後は再起動してください" FontSize="10" />
-      <TextBlock Text="{Binding IPCServerStatus, Mode=OneWay}" FontStyle="Italic" />
-
-      <mah:MetroHeader Header="IPCチャンネル名" Margin="0 15 0 0">
-        <TextBox
-          Text="{Binding Config.IPCChannelName, Mode=TwoWay}" />
-      </mah:MetroHeader>
-      <TextBlock Text="* 通常は変更する必要がありません" FontSize="10" Margin="0 2 0 0" />
-      <TextBlock Text="* 変更後は再起動してください" FontSize="10" />
-
-      <mah:ToggleSwitch
-        Margin="0 15 0 0"
-        HorizontalAlignment="Stretch"
         Content="REST API を待受ける"
         IsOn="{Binding Config.IsEnabledRestApiServer, Mode=TwoWay}" />
       <TextBlock Text="* 変更後は再起動してください" FontSize="10" />

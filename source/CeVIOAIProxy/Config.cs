@@ -138,24 +138,6 @@ namespace CeVIOAIProxy
             set => this.SetProperty(ref this.tcpServerPort, value);
         }
 
-        private bool isEnabledIPCServer;
-
-        [JsonProperty(PropertyName = "is_enabled_ipc_server")]
-        public bool IsEnabledIPCServer
-        {
-            get => this.isEnabledIPCServer;
-            set => this.SetProperty(ref this.isEnabledIPCServer, value);
-        }
-
-        private string ipcChannelName;
-
-        [JsonProperty(PropertyName = "ipc_channel_name")]
-        public string IPCChannelName
-        {
-            get => this.ipcChannelName;
-            set => this.SetProperty(ref this.ipcChannelName, value);
-        }
-
         private bool isEnabledRestApiServer;
 
         [JsonProperty(PropertyName = "is_enabled_rest_api_server")]

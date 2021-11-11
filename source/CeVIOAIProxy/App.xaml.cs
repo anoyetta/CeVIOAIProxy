@@ -19,7 +19,6 @@ namespace CeVIOAIProxy
     public partial class App : Application
     {
         private CAPTcpServer server;
-        private IpcRemotingServerController ipcServer;
         private BouyomiChanHttpServer restServer;
 
         public App()
@@ -43,14 +42,6 @@ namespace CeVIOAIProxy
 
             this.server = new CAPTcpServer();
             this.server.Open(c.TcpServerPort);
-
-            this.ipcServer = new IpcRemotingServerController();
-
-            if (c.IsEnabledIPCServer &&
-                !string.IsNullOrEmpty(c.IPCChannelName))
-            {
-                this.ipcServer.Open();
-            }
 
             if (c.IsEnabledRestApiServer)
             {
@@ -77,13 +68,6 @@ namespace CeVIOAIProxy
                 this.server.Close();
                 this.server.Dispose();
                 this.server = null;
-            }
-
-            if (this.ipcServer != null)
-            {
-                this.ipcServer.Close();
-                this.ipcServer.Dispose();
-                this.ipcServer = null;
             }
 
             if (this.restServer != null)
