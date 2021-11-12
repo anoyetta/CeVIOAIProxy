@@ -19,7 +19,7 @@
     <RepositoryType>GitHub</RepositoryType>
     <Version>1.3.0.1</Version>
     <StartupObject>CeVIOAIProxy.App</StartupObject>
-    <FileVersion>1.3.0.0</FileVersion>
+    <FileVersion>1.3.0.1</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
