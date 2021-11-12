@@ -1,14 +1,14 @@
-using CeVIO.Talk.RemoteService2;
-using CeVIOAIProxy.Servers;
-using Microsoft.Win32;
-using Prism.Commands;
-using Prism.Mvvm;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using CeVIO.Talk.RemoteService2;
+using CeVIOAIProxy.Servers;
+using Microsoft.Win32;
+using Prism.Commands;
+using Prism.Mvvm;
 
 namespace CeVIOAIProxy
 {
@@ -72,6 +72,11 @@ namespace CeVIOAIProxy
                     CommentTextFileSubscriber.Current?.Start();
                 }
             };
+
+            if (this.Config.IsEnabledTextPolling)
+            {
+                CommentTextFileSubscriber.Current?.Start();
+            }
         }
 
         private void SetCurrentComponents()

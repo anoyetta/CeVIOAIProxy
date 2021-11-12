@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace CeVIOAIProxy.Servers
 {
@@ -47,10 +48,9 @@ namespace CeVIOAIProxy.Servers
                 this.watcher.Path = Path.GetDirectoryName(Config.Instance.CommentTextFilePath);
                 this.watcher.Filter = Path.GetFileName(Config.Instance.CommentTextFilePath);
                 this.watcher.IncludeSubdirectories = false;
-                this.watcher.NotifyFilter = NotifyFilters.CreationTime | NotifyFilters.LastWrite;
+                this.watcher.NotifyFilter = NotifyFilters.LastWrite;
                 this.watcher.InternalBufferSize = 64 * 1024;
 
-                this.watcher.Created += this.Watcher_Created;
                 this.watcher.Changed += this.Watcher_Changed;
 
                 this.watcher.EnableRaisingEvents = true;
@@ -70,27 +70,13 @@ namespace CeVIOAIProxy.Servers
             }
         }
 
-        private async void Watcher_Created(object sender, FileSystemEventArgs e)
-        {
-            lock (this)
-            {
-                if (!Config.Instance.IsEnabledTextPolling)
-                {
-                    return;
-                }
-
-                if (this.watcher == null)
-                {
-                    return;
-                }
-            }
-
-            var comment = File.ReadAllText(e.FullPath, new UTF8Encoding(false));
-            await CeVIO.SpeakAsync(comment);
-        }
+        private string lastComment = string.Empty;
+        private DateTime lastCommentTimestamp = DateTime.MinValue;
 
         private async void Watcher_Changed(object sender, FileSystemEventArgs e)
         {
+            var comment = string.Empty;
+
             lock (this)
             {
                 if (!Config.Instance.IsEnabledTextPolling)
@@ -102,9 +88,46 @@ namespace CeVIOAIProxy.Servers
                 {
                     return;
                 }
+
             }
 
-            var comment = File.ReadAllText(e.FullPath, new UTF8Encoding(false));
+            var interval = 10;
+            var timeout = 1000;
+
+            for (int i = 0; i < (timeout / interval); i++)
+            {
+                try
+                {
+                    comment = File.ReadAllText(e.FullPath, new UTF8Encoding(false));
+                    break;
+                }
+                catch (IOException)
+                {
+                    await Task.Delay(TimeSpan.FromMilliseconds(interval));
+                }
+            }
+
+            if (string.IsNullOrEmpty(comment))
+            {
+                return;
+            }
+
+            lock (this)
+            {
+                var now = DateTime.Now;
+
+                if ((now - this.lastCommentTimestamp) < TimeSpan.FromSeconds(1))
+                {
+                    if (this.lastComment.Equals(comment))
+                    {
+                        return;
+                    }
+                }
+
+                this.lastComment = comment;
+                this.lastCommentTimestamp = now;
+            }
+
             await CeVIO.SpeakAsync(comment);
         }
     }
